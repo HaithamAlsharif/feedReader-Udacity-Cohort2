@@ -13,6 +13,7 @@ $(function() {
     * a related set of tests. This suite is all about the RSS
     * feeds definitions, the allFeeds variable in our application.
     */
+
     describe('RSS Feeds', function() {
         /* This is our first test - it tests to make sure that the
          * allFeeds variable has been defined and that it is not
@@ -32,13 +33,74 @@ $(function() {
          * and that the URL is not empty.
          */
 
+        it('has URL', function(){
+            for(feed of allFeeds){
+                expect(feed.url).toBeDefined();
+                expect(feed.url).toBeTruthy();
+            }
+        });
+
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+
+        it('has a name', function(){
+            for(feed of allFeeds){
+                expect(feed.name).toBeDefined();
+                expect(feed.name).toBeTruthy();
+            }
+        });
     });
 
+    describe('The menu', function(){
+
+        beforeEach(function(){
+            body = document.getElementsByTagName('body');
+            // here I learnt to use jquery for simplicity
+            $icon = $('.menu-icon-link')
+        });
+
+        it('is hidden by default',function(){
+            expect(body[0].classList[0]).toBe('menu-hidden');
+        });
+
+        it('changes visibility when clicked', function(){
+            $icon.trigger('click');
+            expect(body[0].classList[0]).not.toBe('menu-hidden');
+            $icon.trigger('click');
+            expect(body[0].classList[0]).toBe('menu-hidden');
+        });
+
+
+    });
+
+    describe('Initial Entries',function(){
+        // beforeEach(function(done){
+        //     loadFeed(function(){
+        //     });
+        // });
+
+        $feed = $('.feed');
+        it('there is at least a single entry',function(){
+            // loadFeed();
+            expect($feed.length).not.toBe(0);
+        });
+        
+    });
+
+    // console.log(feedList)
+
+    describe('New Feed Selection', function(){
+        $feedList = $('.feed-list');
+        $feed1 = $('.feed');        
+        $feedList.trigger('click');
+        $feed2 = $('.feed');
+        it('loaded a new feed', function(){
+            expect($feed1).not.toBe($feed2);
+        });
+    });
 
     /* TODO: Write a new test suite named "The menu" */
 

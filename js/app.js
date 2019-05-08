@@ -116,6 +116,8 @@ $(function() {
      * the menu, load the feed, and prevent the default action
      * (following the link) from occurring.
      */
+    console.log(feedList);
+    
     feedList.on('click', 'a', function() {
         var item = $(this);
 
